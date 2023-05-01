@@ -29,4 +29,21 @@ describe('Check string validators', () => {
     schema.contains('whatthe');
     expect(schema.isValid('what does the fox say')).toBe(false);
   });
+
+  test('minLength', () => {
+    const v = new Validator();
+    const schema = v.string();
+
+    schema.minLength(7);
+    expect(schema.isValid('fox')).toBe(false);
+    expect(schema.isValid('fox says puh')).toBe(true);
+  })
+
+  test('should validate strings with numbers', () => {
+    const v = new Validator();
+    const schema = v.string().required().minLength(4).contains('fox');
+
+    expect(schema.isValid('555fox5')).toBe(true);
+    expect(schema.isValid('fox')).toBe(false);
+  });
 });
