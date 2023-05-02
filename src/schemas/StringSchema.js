@@ -1,45 +1,26 @@
 export default class StringSchema {
-  options = {
-    isRequired: false,
-    containStr: [],
-    minLength: null,
-  };
+  constructor(checks) {
+    this.checks = checks;
+    this.requiredValue = false;
+  }
 
   contains(str) {
-    this.options.containStr.push(str);
+    this.checks.addCheck((value) => value.includes(str));
     return this;
   }
 
   required() {
-    this.options.isRequired = true;
+    this.requiredValue = true;
+    this.checks.addCheck((value) => !!value?.trim());
     return this;
   }
 
   minLength(minLength) {
-    this.options.minLength = minLength;
+    this.checks.addCheck((value) => typeof value === 'string' && value.length >= minLength);
     return this;
   }
 
   isValid(value) {
-    const checks = [];
-
-    if (this.options.isRequired) {
-      checks.push((value) => !!value);
-    }
-
-    if (this.options.minLength) {
-      checks.push((value) => {
-        if (!value && !this.options.required) {
-          return true;
-        }
-        return value?.length >= this.options.minLength;
-      });
-    }
-
-    if (this.options.containStr.length > 0) {
-      checks.push((value) => this.options.containStr.every((string) => value.includes(string)));
-    }
-
-    return checks.every((check) => check(value) === true);
+    return this.checks.getCheck(value);
   }
 }
