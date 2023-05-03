@@ -6,6 +6,7 @@ import ObjectSchema from './schemas/ObjectSchema.js';
 
 export default class Validator {
   constructor() {
+    this.newValidators = [];
     this.schemas = {
       string: StringSchema,
       number: NumberSchema,
@@ -15,7 +16,7 @@ export default class Validator {
   }
 
   setSchema(type) {
-    return new this.schemas[type](new CheckValidator());
+    return new this.schemas[type](new CheckValidator(), this.newValidators);
   }
 
   string() {
@@ -32,5 +33,9 @@ export default class Validator {
 
   object() {
     return this.setSchema('object');
+  }
+
+  addValidator(type, name, fn) {
+    this.newValidators.push({ type, name, fn });
   }
 }
