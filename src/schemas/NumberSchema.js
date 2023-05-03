@@ -1,5 +1,3 @@
-import isNumber from '../options/numberValidator.js';
-
 export default class NumberSchema {
   constructor(checks, newValidators) {
     this.newValidators = newValidators;
@@ -31,9 +29,6 @@ export default class NumberSchema {
   }
 
   isValid(value) {
-    if (isNumber(value)) {
-      return this.checks.getCheck(value);
-    }
-    return false;
+    return this.checks.getCheck(value);
   }
 }

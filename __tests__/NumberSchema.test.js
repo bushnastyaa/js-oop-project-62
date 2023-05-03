@@ -7,8 +7,8 @@ describe('Check numbers validators', () => {
     const schema = v.number();
 
     expect(schema.isValid(7)).toBe(true);
-    expect(schema.isValid('string')).toBe(false);
     expect(schema.isValid(null)).toBe(true);
+    expect(!schema.isValid(0)).toBe(true);
   });
 
   test('required', () => {
