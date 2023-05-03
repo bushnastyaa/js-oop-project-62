@@ -23,7 +23,7 @@ describe('Check numbers validators', () => {
   test('range validator', () => {
     const v = new Validator();
     const schema = v.number();
- 
+
     expect(schema.range(-5, 5).isValid(5)).toBe(true);
     expect(schema.range(3, 5).isValid(5)).toBe(true);
     expect(schema.range(0, 5).isValid(-5)).toBe(false);

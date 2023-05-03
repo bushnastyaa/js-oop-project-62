@@ -12,7 +12,7 @@ export default class Validator {
       number: NumberSchema,
       array: ArraySchema,
       object: ObjectSchema,
-    }
+    };
   }
 
   setSchema(type) {

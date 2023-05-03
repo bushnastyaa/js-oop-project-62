@@ -38,7 +38,7 @@ describe('Check string validators', () => {
     schema.minLength(7);
     expect(schema.isValid('fox')).toBe(false);
     expect(schema.isValid('fox says puh')).toBe(true);
-  })
+  });
 
   test('should validate strings with numbers', () => {
     const v = new Validator();

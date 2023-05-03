@@ -25,7 +25,7 @@ describe('Check object validators', () => {
     expect(schema.isValid({ name: 'maya', age: null })).toBe(true);
     expect(schema.isValid({ name: '', age: null })).toBe(false);
     expect(schema.isValid({ name: 'ada', age: -5 })).toBe(false);
-  })
+  });
 
   test('should validate without object', () => {
     const v = new Validator();
