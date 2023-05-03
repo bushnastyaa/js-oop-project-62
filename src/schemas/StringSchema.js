@@ -1,7 +1,8 @@
+import isString from '../options/stringValidator.js';
+
 export default class StringSchema {
   constructor(checks) {
     this.checks = checks;
-    this.requiredValue = false;
   }
 
   contains(str) {
@@ -10,17 +11,19 @@ export default class StringSchema {
   }
 
   required() {
-    this.requiredValue = true;
     this.checks.addCheck((value) => !!value?.trim());
     return this;
   }
 
   minLength(minLength) {
-    this.checks.addCheck((value) => typeof value === 'string' && value.length >= minLength);
+    this.checks.addCheck((value) => value.length >= minLength);
     return this;
   }
 
   isValid(value) {
-    return this.checks.getCheck(value);
+    if (isString(value)) {
+      return this.checks.getCheck(value);
+    }
+    return false;
   }
 }

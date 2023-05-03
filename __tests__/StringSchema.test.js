@@ -15,6 +15,7 @@ describe('Check string validators', () => {
     expect(schema.isValid('')).toBe(true);
     expect(schema.isValid(null)).toBe(true);
     expect(schema.isValid(undefined)).toBe(true);
+    expect(schema.isValid(8)).toBe(false);
 
     schema.required();
 
