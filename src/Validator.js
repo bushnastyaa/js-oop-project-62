@@ -2,6 +2,7 @@ import StringSchema from './schemas/StringSchema.js';
 import CheckValidator from './CheckValidator.js';
 import NumberSchema from './schemas/NumberSchema.js';
 import ArraySchema from './schemas/ArraySchema.js';
+import ObjectSchema from './schemas/ObjectSchema.js';
 
 export default class Validator {
   constructor() {
@@ -9,6 +10,7 @@ export default class Validator {
       string: StringSchema,
       number: NumberSchema,
       array: ArraySchema,
+      object: ObjectSchema,
     }
   }
 
@@ -26,5 +28,9 @@ export default class Validator {
 
   array() {
     return this.setSchema('array');
+  }
+
+  object() {
+    return this.setSchema('object');
   }
 }
