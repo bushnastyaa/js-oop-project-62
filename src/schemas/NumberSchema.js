@@ -5,7 +5,12 @@ export default class NumberSchema {
   }
 
   positive() {
-    this.checks.addCheck((value) => value >= 0);
+    this.checks.addCheck((value) => {
+      if (typeof value !== 'number') {
+        return true;
+      }
+      return value > 0;
+    });
     return this;
   }
 
@@ -15,7 +20,12 @@ export default class NumberSchema {
   }
 
   range(min, max) {
-    this.checks.addCheck((value) => value >= min && value <= max);
+    this.checks.addCheck((value) => {
+      if (typeof value !== 'number') {
+        return true;
+      }
+      return value >= min && value <= max;
+    });
     return this;
   }
 

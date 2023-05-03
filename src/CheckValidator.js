@@ -8,6 +8,6 @@ export default class CheckValidator {
   }
 
   getCheck(value) {
-    return this.checks.every((check) => check(value));
+    return this.checks.every((check) => check(value) === true);
   }
 }

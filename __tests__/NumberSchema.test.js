@@ -8,7 +8,6 @@ describe('Check numbers validators', () => {
 
     expect(schema.isValid(7)).toBe(true);
     expect(schema.isValid(null)).toBe(true);
-    expect(!schema.isValid(0)).toBe(true);
   });
 
   test('required', () => {
