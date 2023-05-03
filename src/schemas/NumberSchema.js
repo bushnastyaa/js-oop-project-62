@@ -1,7 +1,8 @@
+import isNumber from '../options/numberValidator.js';
+
 export default class NumberSchema {
   constructor(checks) {
     this.checks = checks;
-    this.requiredValue = false;
   }
 
   positive() {
@@ -10,7 +11,6 @@ export default class NumberSchema {
   }
 
   required() {
-    this.requiredValue = true;
     this.checks.addCheck((value) => typeof value === 'number');
     return this;
   }
@@ -21,6 +21,9 @@ export default class NumberSchema {
   }
 
   isValid(value) {
-    return this.checks.getCheck(value);
+    if (isNumber(value)) {
+      return this.checks.getCheck(value);
+    }
+    return false;
   }
 }
