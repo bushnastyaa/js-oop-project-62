@@ -1,3 +1,5 @@
+import isNumber from '../options/numberValidator.js';
+
 export default class NumberSchema {
   constructor(checks, newValidators) {
     this.newValidators = newValidators;
@@ -5,12 +7,7 @@ export default class NumberSchema {
   }
 
   positive() {
-    this.checks.addCheck((value) => {
-      if (typeof value !== 'number') {
-        return true;
-      }
-      return value > 0;
-    });
+    this.checks.addCheck((value) => typeof value !== 'number' ? true : value > 0);
     return this;
   }
 
@@ -20,12 +17,7 @@ export default class NumberSchema {
   }
 
   range(min, max) {
-    this.checks.addCheck((value) => {
-      if (typeof value !== 'number') {
-        return true;
-      }
-      return value >= min && value <= max;
-    });
+    this.checks.addCheck((value) => value >= min && value <= max);
     return this;
   }
 
@@ -39,6 +31,9 @@ export default class NumberSchema {
   }
 
   isValid(value) {
-    return this.checks.getCheck(value);
+    if (isNumber(value)) {
+      return this.checks.getCheck(value);
+    }
+    return false;
   }
 }
