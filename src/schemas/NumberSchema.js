@@ -7,7 +7,12 @@ export default class NumberSchema {
   }
 
   positive() {
-    this.checks.addCheck((value) => typeof value !== 'number' ? true : value > 0);
+    this.checks.addCheck((value) => {
+      if (typeof value !== 'number') {
+        return true;
+      }
+      return value > 0;
+    });
     return this;
   }
 
